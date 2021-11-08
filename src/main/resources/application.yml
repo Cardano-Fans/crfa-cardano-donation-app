@@ -127,5 +127,5 @@ entities:
 
 dryRunMode: true
 env: mainnet
-blockFrostProjectId: ogf0WXXsE3tY8ara3YUBmEJ9KRVnVBo6
+blockFrostProjectId: ???
 dbPath: crfa-cardano-donation-app-dev.db
