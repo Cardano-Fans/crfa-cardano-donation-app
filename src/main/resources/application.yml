@@ -125,6 +125,30 @@ entities:
       - NamiWallet
     description: Creators of SpaceBudz, Nami-Wallet and contributing to CIPs
 
+  21ada:
+    name: 21ada
+    address: addr1qx03y9xfx998r52lxxawf8tzezgc4wca9avw34lp7e2lqnndyhdrc2qd3l0ds5hgmllcnsupwet593hgs5t9mwv7y6sqpvtteg
+    hasPool: true
+    ticker: 21ADA
+    websites:
+      - https://www.21ada.ca/
+      - https://www.wencnft.com/
+    twitter:
+      - thinkgrowcrypto
+    description: Creators of wencnft.io
+
+  tango:
+    name: tango
+    address: addr1qxw567xyzgqchtyddeha90ugsr8uyu7h4uh8wg5su8qz7yykq2ndwcmedv72l7263vj96tl6cyn74l2mw5kp8h7fk8rqevat3x
+    hasPool: true
+    ticker: TANGO
+    websites:
+      - https://github.com/tango-crypto/cardano-wallet-js
+      - https://www.tangocrypto.com/
+    twitter:
+      - tango_crypto
+    description: Creators of cardano-wallet-js
+
 dryRunMode: true
 env: mainnet
 blockFrostProjectId: ???
