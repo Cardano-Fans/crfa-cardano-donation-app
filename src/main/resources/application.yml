@@ -1,0 +1,131 @@
+micronaut:
+  application:
+    name: crfa-cardano-donation-app
+  server:
+    port: 9095
+
+donation:
+  cadence: super-epoch
+  cardano-fans: 0
+  ktorZ: 0
+
+entities:
+
+  crfa:
+    name: cardano-fans
+    address: addr1q8nq8wdhrpq402qj4hyn5rxn624l0ccua8k3epl2xl3fz57zddeldn7syvs5x2uvuefk66azhr7lelrj423lxapuxkksknwfdj
+    hasPool: true
+    ticker: CRFA
+    websites:
+      - https://cardano.fans
+      - https://datastudio.google.com/s/h1m7mg_xMgI
+      - https://cardano-fans.medium.com/
+      - https://github.com/Cardano-Fans
+    twitter:
+      - matiwinnetou
+      - andrefs
+    description: Creators of this app, Cardano Blockchain Insights (https://datastudio.google.com/s/h1m7mg_xMgI)
+
+  ktorZ:
+    name: ktorZ
+    address: addr1g8alec26en95yzvzwpxfukglsw4nx9wrx99p3m8k2drwppvzj2enszcqyu9ps2
+    hasPool: false
+    websites:
+      - https://ogmios.dev
+      - https://github.com/CardanoSolutions/ogmios
+    description: Creators ogmios - a WebSocket JSON/RPC bridge for Cardano used by many projects in the ecosystem, e.g. SundaeSwap
+
+  ccvault:
+    name: ccvault
+    address: addr1qxnk9w6e3azattu87ythnnjt2vmtlskzcld0ptwa924j0znz7v4zyqfqapmueh24l2r8v848mya68nndvjy783m656kq0cxjsn
+    hasPool: true
+    ticker: CCW
+    websites:
+      - https://ccvault.io
+    twitter:
+      -
+    description: Creators ccwallet, very popular Cardano Lightweight wallet.
+
+  onchainlabs:
+    name: on-chain-labs
+    address: addr1vycmju7zumcgq5wsdmdwkxafhhuu3xeed60auwngww2fkjcr38qjm
+    hasPool: false
+    websites:
+      - https://github.com/OnChainLabs
+    twitter:
+      - onchain_labs
+    description: Creators of freely available NFT Plutus Smart contracts and open source NFT market place
+
+  ADAPH:
+      name: ADAPH
+      address: addr1q8nrqg4s73skqfyyj69mzr7clpe8s7ux9t8z6l55x2f2xuqra34p9pswlrq86nq63hna7p4vkrcrxznqslkta9eqs2nscfavlf
+      hasPool: true
+      ticker: ADAPH
+      websites:
+        - https://identity.adaph.io/
+        - http://www.adaph.io/
+        - https://github.com/ADAPhilippines/
+      twitter:
+        - adaphio
+        - clarkalesna
+      description: Creators of login by wallet solution - https://identity.adaph.io/
+
+  2nd-Layer:
+    name: 2nd-Layer
+    address: addr1q8n9fvnsdtdt5fpgtl5tmcwuffx6p8ghnglvdt9ww29sp2x55ludjw69v2yunl2p8utckd79etn7m3uaw69swxkmanlq4tvnkk
+    hasPool: false
+    websites:
+      - https://github.com/2nd-Layer/
+    twitter:
+      - LiberalMark
+    # for now only monthly is supported (!)
+    cadence: monthly
+    description: Company creating tools and libraries for Cardano, e.g. rust based networking library used by cncli tool
+
+  easy1:
+    name: easy1
+    address: addr1qyma8s3sehdhn626ls5v8y3xwm0w7lhlwqznxggnw4slcwavatgc4hdkune2k9xalx3tgskrva0g243ehggg8wkkpzdquegjwp
+    hasPool: true
+    ticker: EASY1
+    websites:
+      - https://easystaking.online/
+      - https://beta.stakeboard.net/
+      - https://github.com/Haxfx
+    twitter:
+      - CryptoJoe101
+      - Stakeboard_
+    # for now only monthly is supported (!)
+    cadence: monthly
+    description: Creators of Stakeboard - tool to help delegators choose right pools (the ones supporting Cardano ecosystem)
+  berlin-pool:
+      name: berlin-pool
+      address: addr1qykpnhatcgyuh7kvz7k4k3k2cqllmzqskkzdp5qe22y88gtwkusnp8r253ca68jjpgdl67yckkv47tjqnrg56nyq0pzsl0x8tf
+      hasPool: true
+      ticker: BRLN
+      websites:
+        - https://staking.berlin/en/
+        - http://instagram.com/staking.berlin/
+        - https://github.com/adagate-io/adagate-api
+      twitter:
+        - stakingberlin
+      description: Creators of REST API to Cardano called AdaGate
+  berry:
+    name: berry
+    address: addr1qxfauplclmk6fxuncn8adqt7hnahhlz2pvvzxlqpj6eqtk35g6en4e2aya53ewldpqxl2xpzvtps0ndtvtf6fzpl880sqdj2y8
+    hasPool: true
+    ticker: BERRY
+    websites:
+      - https://berrypool.io/
+      - https://namiwallet.io/
+      - https://github.com/Berry-Pool/nami-wallet
+      - https://github.com/Berry-Pool/spacebudz
+      - https://github.com/Berry-Pool
+    twitter:
+      - berry_ales
+      - NamiWallet
+    description: Creators of SpaceBudz, Nami-Wallet and contributing to CIPs
+
+dryRunMode: true
+env: mainnet
+blockFrostProjectId: ogf0WXXsE3tY8ara3YUBmEJ9KRVnVBo6
+dbPath: crfa-cardano-donation-app-dev.db
