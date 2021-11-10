@@ -1,3 +1,4 @@
+# WORK IN PROGRESS
 
 ## Introduction
 This is a donation application that automatically donates to certain entities / addresses specified in configuration file. It can donate either on epoch or super epoch (6 epochs) cadence.
