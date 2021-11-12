@@ -3,43 +3,43 @@ package crfa.app.repository;
 import com.google.common.collect.ImmutableMap;
 import crfa.app.domain.Entity;
 import io.micronaut.context.env.Environment;
+import io.micronaut.core.type.Argument;
 import jakarta.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Map;
+import java.util.Optional;
 
 @Singleton
 @Slf4j
 public class EntityRepository {
 
     // entityId to address
-    private Map<String, Entity> entityMap;
+    private final Map<String, Entity> entityMap;
 
     public EntityRepository(Environment environment) {
-        loadEntities(environment);
+        this.entityMap = loadEntities(environment);
     }
 
-    public Map<String, Entity> getEntityMap() {
-        return entityMap;
+    public Optional<Entity> findById(String entityId) {
+        return Optional.ofNullable(entityMap.get(entityId));
     }
 
     private Map<String, Entity> loadEntities(Environment environment) {
         ImmutableMap.Builder<String, Entity> builder = ImmutableMap.builder();
 
-        environment.get("entities", Map.class)
-                .ifPresent(dataMap -> {
-                    dataMap.values().forEach(a -> {
-                        var obj = (Map) a;
+        environment.get("entities", Argument.mapOf(Argument.STRING, Argument.mapOf(String.class, String.class)))
+                .ifPresent(list -> {
+                        list.forEach((key, dataMap) -> {
+                            dataMap.forEach((entityId, address) -> {
+                                var entity = Entity.builder()
+                                        .name(entityId)
+                                        .address(address)
+                                        .build();
 
-                        var name = (String) obj.get("name");
-
-                        var entity = Entity.builder()
-                                .name(name)
-                                .address((String) obj.get("address"))
-                                .build();
-
-                        builder.put(name, entity);
-                    });
+                                builder.put(entityId, entity);
+                            });
+                        });
                 });
 
         return builder.build();

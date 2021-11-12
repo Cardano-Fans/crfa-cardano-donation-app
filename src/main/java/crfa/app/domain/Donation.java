@@ -8,6 +8,8 @@ import lombok.*;
 import java.math.BigInteger;
 import java.util.Date;
 
+import static com.j256.ormlite.field.DataType.DATE;
+
 @Builder
 @DatabaseTable(tableName = "donation")
 @Getter
@@ -21,16 +23,19 @@ public class Donation {
 
     @DatabaseField(canBeNull = false, index = true)
     // e.g. epoch or super epoch number
-    int epoch;
+    int epochNo;
 
     @DatabaseField(canBeNull = false, index = true)
-    int superEpoch;
+    int superEpochNo;
 
-    @DatabaseField(canBeNull = false, dataType = DataType.DATE)
+    @DatabaseField(canBeNull = false, dataType = DATE)
     Date date;
 
     @DatabaseField(canBeNull = false, index = true)
     Cadence cadence;
+
+    @DatabaseField(canBeNull = false, index = true)
+    String entityId;
 
     @DatabaseField(canBeNull = false)
     String address;

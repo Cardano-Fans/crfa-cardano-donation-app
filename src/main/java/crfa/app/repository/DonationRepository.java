@@ -3,7 +3,9 @@ package crfa.app.repository;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
+import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.table.TableUtils;
+import crfa.app.domain.Cadence;
 import crfa.app.domain.Donation;
 import io.micronaut.context.annotation.Value;
 import io.micronaut.runtime.event.annotation.EventListener;
@@ -12,6 +14,10 @@ import jakarta.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
 
 import java.sql.SQLException;
+import java.util.Optional;
+
+import static crfa.app.domain.Cadence.EPOCH;
+import static crfa.app.domain.Cadence.SUPER_EPOCH;
 
 @Singleton
 @Slf4j
@@ -36,43 +42,52 @@ public class DonationRepository {
         createDbsIfNecessary();
     }
 
-//   public List<Donation> () {
-//       try {
-//           return jdbcRepository.getCommunityDelegatorTokenEventDao().queryForAll();
-//       } catch (SQLException e) {
-//           log.error("db error", e);
-//           throw new RuntimeException(e);
-//       }
-//   }
+    public Optional<Donation> findDonationByEpochNo(int epochNo, String entityId) {
+        try {
+            QueryBuilder<Donation, String> statementBuilder = donationDao.queryBuilder();
 
-//    public Optional<Donation> findDonationByCadenceValueAndEntityId(int cadenceValue, String entityId) {
-//        try {
-//            Dao<CommunityDelegatorTokenEvent, String> communityDelegatorTokenEventDao = jdbcRepository.getCommunityDelegatorTokenEventDao();
-//
-//            QueryBuilder<CommunityDelegatorTokenEvent, String> statementBuilder = communityDelegatorTokenEventDao.queryBuilder();
-//
-//            statementBuilder.where().eq("symbol",  tokenSymbol)
-//                    .and()
-//                    .eq("delegatorStakeAddress", stakeAddr);
-//
-//            // for now one tokenSymbol per whole lifetime of stake address
-//            return communityDelegatorTokenEventDao.query(statementBuilder.prepare()).stream().findFirst();
-//        } catch (SQLException e) {
-//            log.error("db error", e);
-//            throw new RuntimeException(e);
-//        }
-//    }
-//
-//    public void insertNewCommunityTokenEvent(CommunityDelegatorTokenEvent delegatorTokenEvent) {
-//        try {
-//            Dao<CommunityDelegatorTokenEvent, String> communityDelegatorTokenEventDao = jdbcRepository.getCommunityDelegatorTokenEventDao();
-//
-//            communityDelegatorTokenEventDao.createIfNotExists(delegatorTokenEvent);
-//        } catch (SQLException e) {
-//            log.error("db error", e);
-//            throw new RuntimeException(e);
-//        }
-//    }
+            statementBuilder.where()
+                    .eq("cadence", EPOCH)
+                    .and()
+                    .eq("epochNo", epochNo)
+                    .and()
+                    .eq("entityId", entityId);
+
+            // for now one tokenSymbol per whole lifetime of stake address
+            return donationDao.query(statementBuilder.prepare()).stream().findFirst();
+        } catch (SQLException e) {
+            log.error("db error", e);
+            throw new RuntimeException(e);
+        }
+    }
+
+    public Optional<Donation> findDonationBySuperEpochNo(int superEpochNo, String entityId) {
+        try {
+            QueryBuilder<Donation, String> statementBuilder = donationDao.queryBuilder();
+
+            statementBuilder.where()
+                    .eq("cadence", SUPER_EPOCH)
+                    .and()
+                    .eq("superEpochNo", superEpochNo)
+                    .and()
+                    .eq("entityId", entityId);
+
+            // for now one tokenSymbol per whole lifetime of stake address
+            return donationDao.query(statementBuilder.prepare()).stream().findFirst();
+        } catch (SQLException e) {
+            log.error("db error", e);
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void insertDonation(Donation donation) {
+        try {
+            donationDao.create(donation);
+        } catch (SQLException e) {
+            log.error("db error", e);
+            throw new RuntimeException(e);
+        }
+    }
 
     public void createDbsIfNecessary() throws SQLException {
         TableUtils.createTableIfNotExists(this.connectionSource, Donation.class);

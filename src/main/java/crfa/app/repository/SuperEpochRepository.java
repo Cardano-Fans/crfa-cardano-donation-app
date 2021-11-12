@@ -31,7 +31,7 @@ public class SuperEpochRepository {
         return superEpochs;
     }
 
-    @Scheduled(fixedDelay = "1h", initialDelay = "1s")
+    @Scheduled(fixedDelay = "1h", initialDelay = "1h")
     public void refreshData() {
         var epochNo = blockfrostApi.getLatestBlock().getEpoch();
         log.info("Refreshing super epochs... currentEpochNo: {}", epochNo);

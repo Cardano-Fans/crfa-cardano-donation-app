@@ -5,9 +5,11 @@ micronaut:
     port: 9095
 
 donation:
-  cadence: super-epoch
-  cardano-fans: 0
-  ktorZ: 0
+  # SUPER_EPOCH or EPOCH
+  cadence: SUPER_EPOCH
+  entities:
+    cardano-fans: 1
+    ktorZ: 5
 
 entities:
 
@@ -151,5 +153,5 @@ entities:
 
 dryRunMode: true
 env: mainnet
-blockFrostProjectId: ???
+blockFrostProjectId: ?
 dbPath: crfa-cardano-donation-app-dev.db
