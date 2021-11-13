@@ -1,6 +1,5 @@
 package crfa.app.domain;
 
-import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import lombok.*;
@@ -43,5 +42,9 @@ public class Donation {
     @DatabaseField(canBeNull = false)
     // amount in lovelaces
     BigInteger amount;
+
+    @DatabaseField(canBeNull = false, index = true)
+    @Setter
+    String transactionId;
 
 }
