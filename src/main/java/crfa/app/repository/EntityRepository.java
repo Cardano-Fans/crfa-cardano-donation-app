@@ -28,16 +28,22 @@ public class EntityRepository {
     private Map<String, Entity> loadEntities(Environment environment) {
         ImmutableMap.Builder<String, Entity> builder = ImmutableMap.builder();
 
-        environment.get("entities", Argument.mapOf(Argument.STRING, Argument.mapOf(String.class, String.class)))
+        environment.get("entities", Argument.mapOf(Argument.STRING, Argument.mapOf(String.class, Object.class)))
                 .ifPresent(list -> {
-                        list.forEach((key, dataMap) -> {
-                            dataMap.forEach((entityId, address) -> {
-                                var entity = Entity.builder()
-                                        .name(entityId)
-                                        .address(address)
-                                        .build();
+                        list.forEach((entityId, dataMap) -> {
+                            dataMap.forEach((name, obj) -> {
+                                if (obj instanceof String) {
+                                    var addr  = (String) obj;
+                                    if (name.equals("address")) {
+                                        var entity = Entity.builder()
+                                                .name(entityId)
+                                                .address(addr)
+                                                .build();
 
-                                builder.put(entityId, entity);
+                                        builder.put(entityId, entity);
+                                    }
+                                }
+
                             });
                         });
                 });

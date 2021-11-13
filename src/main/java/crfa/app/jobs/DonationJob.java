@@ -62,7 +62,7 @@ public class DonationJob {
                             var donationToDo = false;
                             if (cadence == EPOCH && donationRepository.findDonationByEpochNo(currentEpochNo, entityId).isEmpty()) {
                                 donationToDo = true;
-                            } else if (cadence == SUPER_EPOCH && donationRepository.findDonationBySuperEpochNo(currentEpochNo, entityId).isEmpty()) {
+                            } else if (cadence == SUPER_EPOCH && donationRepository.findDonationBySuperEpochNo(currentSuperEpochNo, entityId).isEmpty()) {
                                 donationToDo = true;
                             }
 
