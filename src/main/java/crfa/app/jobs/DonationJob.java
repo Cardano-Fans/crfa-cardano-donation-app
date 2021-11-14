@@ -10,6 +10,7 @@ import crfa.app.repository.DonationRepository;
 import crfa.app.repository.EntityRepository;
 import crfa.app.repository.SuperEpochRepository;
 import crfa.app.service.CardanoTokenSender;
+import io.micronaut.context.annotation.Value;
 import io.micronaut.context.env.Environment;
 import io.micronaut.core.type.Argument;
 import io.micronaut.scheduling.annotation.Scheduled;
@@ -34,6 +35,9 @@ public class DonationJob {
     private final EntityRepository entityRepository;
     private final CardanoTokenSender cardanoTokenSender;
     private final Environment environment;
+
+    @Value("${dryRunMode:true}")
+    private boolean dryRunMode;
 
     public DonationJob(BlockfrostApi blockfrostApi,
                        SuperEpochRepository superEpochRepository,
@@ -93,8 +97,13 @@ public class DonationJob {
 
                 // perform transaction to multiple parties
                 try {
-                    var transactionId = cardanoTokenSender.sendDonations(donations);
-                    donations.forEach(donation -> donation.setTransactionId(transactionId));
+                    if (dryRunMode) {
+                        log.info("Running in dryRun mode, we will not send ADA!");
+                        donations.forEach(donation -> donation.setTransactionId("dry_run_mode"));
+                    } else {
+                        var transactionId = cardanoTokenSender.sendDonations(donations);
+                        donations.forEach(donation -> donation.setTransactionId(transactionId));
+                    }
 
                     donations.forEach(donationRepository::insertDonation);
                 } catch (ApiException e) {

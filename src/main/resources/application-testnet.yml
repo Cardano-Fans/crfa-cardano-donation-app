@@ -151,7 +151,8 @@ entities:
       - tango_crypto
     description: Creators of cardano-wallet-js
 
-dryRunMode: true
-env: mainnet
+dryRunMode: false
+env: testnet
 blockFrostProjectId: ?
-dbPath: crfa-cardano-donation-app-dev.db
+walletFilename: .crfa-donation-app-wallet-testnet.dat
+dbPath: crfa-cardano-donation-app-testnet-dev.db
