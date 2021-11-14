@@ -62,8 +62,7 @@ public class CardanoTokenSender {
         this.donationAccount = createAccount(pass, walletIndex);
     }
 
-    @Retryable(attempts = "10", delay ="10s")
-    public String sendDonations(List<Donation> donations) {
+    public String sendDonations(List<Donation> donations) throws ApiException {
         if (donations.isEmpty()) {
             throw new RuntimeException("Nothing to send!");
         }
@@ -73,14 +72,14 @@ public class CardanoTokenSender {
 
             var ttl = blockService.getLastestBlock().getValue().getSlot() + 1000;
             for (Donation donation : donations) {
-                var p = PaymentTransaction.builder()
+                var paymentTransaction = PaymentTransaction.builder()
                         .sender(donationAccount)
                         .receiver(donation.getAddress())
                         .amount(donation.getAmount())
                         .unit(LOVELACE)
                         .build();
 
-                paymentTransactionBuilder.add(p);
+                paymentTransactionBuilder.add(paymentTransaction);
             }
 
             var detailsParams =
@@ -96,11 +95,12 @@ public class CardanoTokenSender {
                     "https://github.com/Cardano-Fans/crfa-cardano-donation-app"
             ));
 
-            // TODO new version of library
             var fee
                     = feeCalculationService.calculateFee(paymentTransactions, detailsParams, memoMetadata);
 
-            paymentTransactions.forEach(paymentTransaction -> paymentTransaction.setFee(fee));
+            // this can be confusing but actually we have to set transaction only once(!), if we set this for all
+            // payment transactions we will pay 3 times
+            paymentTransactions.stream().findFirst().ifPresent(paymentTransaction -> paymentTransaction.setFee(fee));
 
             var transaction
                     = transactionHelperService.transfer(paymentTransactions, detailsParams, memoMetadata);
@@ -111,12 +111,15 @@ public class CardanoTokenSender {
 
                 return transactionResult.getTransactionId();
             }
+
+            log.error("Transaction failed, response:{}", transaction.getResponse());
         } catch (ApiException e) {
-            log.error("blockfrost error", e);
+            log.error("Blockfrost error", e);
+            throw e;
         } catch (AddressExcepion e) {
-            log.error("address error", e);
+            log.error("Address error", e);
         } catch (CborSerializationException e) {
-            log.error("cbor serializtion error", e);
+            log.error("CBOR serializtion error", e);
         }
 
         throw new RuntimeException("Transaction failed.");

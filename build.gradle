@@ -30,7 +30,7 @@ dependencies {
     implementation("commons-io:commons-io:2.11.0")
 
     implementation("io.blockfrost:blockfrost-java:0.1.0-beta3")
-    implementation("com.bloxbean.cardano:cardano-client-lib:0.1.4")
+    implementation("com.bloxbean.cardano:cardano-client-lib:0.1.5")
 
     implementation('com.j256.ormlite:ormlite-jdbc:5.6')
 

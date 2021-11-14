@@ -1,5 +1,6 @@
 package crfa.app.jobs;
 
+import com.bloxbean.cardano.client.backend.exception.ApiException;
 import com.google.common.base.Enums;
 import com.google.common.collect.ImmutableList;
 import crfa.app.domain.Cadence;
@@ -91,11 +92,14 @@ public class DonationJob {
                 var donations = donationsBuilder.build();
 
                 // perform transaction to multiple parties
-                String transactionId = cardanoTokenSender.sendDonations(donations);
+                try {
+                    var transactionId = cardanoTokenSender.sendDonations(donations);
+                    donations.forEach(donation -> donation.setTransactionId(transactionId));
 
-                donations.forEach(donation -> donation.setTransactionId(transactionId));
-
-                donations.forEach(donationRepository::insertDonation);
+                    donations.forEach(donationRepository::insertDonation);
+                } catch (ApiException e) {
+                    log.error("Sending of donations failed, reason:", e);
+                }
             });
         });
     }
