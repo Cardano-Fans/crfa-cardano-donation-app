@@ -13,7 +13,10 @@ import lombok.extern.slf4j.Slf4j;
 public class CRFACardanoTokenDonationApp {
 
     public static void main(String[] args) {
-        Micronaut.run(CRFACardanoTokenDonationApp.class, args);
+        Micronaut.build(args)
+                .eagerInitSingletons(true)
+                .mainClass(CRFACardanoTokenDonationApp.class)
+                .start();
     }
 
     @EventListener

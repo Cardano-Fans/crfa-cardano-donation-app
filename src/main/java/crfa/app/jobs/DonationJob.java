@@ -39,6 +39,12 @@ public class DonationJob {
     @Value("${dryRunMode:true}")
     private boolean dryRunMode;
 
+    @Value("${blockFrostProjectId}")
+    private String projectId;
+
+    @Value("${walletIndex:0}")
+    private int walletIndex;
+
     public DonationJob(BlockfrostApi blockfrostApi,
                        SuperEpochRepository superEpochRepository,
                        DonationRepository donationRepository,

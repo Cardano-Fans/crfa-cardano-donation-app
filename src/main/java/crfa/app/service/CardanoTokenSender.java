@@ -21,7 +21,6 @@ import com.google.common.collect.ImmutableList;
 import crfa.app.domain.Donation;
 import crfa.app.infrastructure.AppEnv;
 import io.micronaut.context.annotation.Value;
-import io.micronaut.retry.annotation.Retryable;
 import io.micronaut.runtime.event.annotation.EventListener;
 import io.micronaut.runtime.server.event.ServerStartupEvent;
 import jakarta.inject.Singleton;
@@ -47,15 +46,14 @@ public class CardanoTokenSender {
 
     private final Account donationAccount;
 
-    @Value("${projectId}")
-    private String projectId;
-
-    @Value("${walletIndex:0}")
-    private int walletIndex;
+    private final String projectId;
 
     public CardanoTokenSender(WalletPassReader walletPassReader,
-                              AppEnvService appEnvService) {
+                              AppEnvService appEnvService,
+                              @Value("${blockFrostProjectId}") String projectId,
+                              @Value("${walletIndex:0}") int walletIndex) {
         this.appEnvService = appEnvService;
+        this.projectId = projectId;
 
         var pass = walletPassReader.readWalletPass();
 
@@ -72,6 +70,7 @@ public class CardanoTokenSender {
 
             var ttl = blockService.getLastestBlock().getValue().getSlot() + 1000;
             for (Donation donation : donations) {
+                log.info("Donation:{}", donation);
                 var paymentTransaction = PaymentTransaction.builder()
                         .sender(donationAccount)
                         .receiver(donation.getAddress())
