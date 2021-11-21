@@ -39,7 +39,7 @@ public class DonationJob {
     @Value("${dryRunMode:true}")
     private boolean dryRunMode;
 
-    @Value("${blockFrostProjectId}")
+    @Value("${projectId}")
     private String projectId;
 
     @Value("${walletIndex:0}")

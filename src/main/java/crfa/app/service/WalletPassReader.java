@@ -14,8 +14,11 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 @Slf4j
 public class WalletPassReader {
 
-    @Value("${walletFilename:.crfa-donation-app-wallet.dat}")
     private String walletLocation;
+
+    public WalletPassReader(@Value("${walletFilename:.crfa-donation-app-wallet.dat}") String walletLocation) {
+        this.walletLocation = walletLocation;
+    }
 
     public String readWalletPass() {
         try {

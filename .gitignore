@@ -13,3 +13,4 @@ out/
 .classpath
 .factorypath
 crfa-cardano-donation-app-dev.db
+crfa-cardano-donation-app-testnet-dev.db

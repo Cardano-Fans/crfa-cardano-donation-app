@@ -7,8 +7,11 @@ import jakarta.inject.Singleton;
 @Singleton
 public class AppEnvService {
 
-    @Value("${env:testnet}")
     private String env;
+
+    public AppEnvService(@Value("${env:testnet}") String env) {
+        this.env = env;
+    }
 
     public AppEnv appEnv() {
         return AppEnv.valueOf(env.toUpperCase());

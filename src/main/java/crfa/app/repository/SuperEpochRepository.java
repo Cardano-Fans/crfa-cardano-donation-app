@@ -12,31 +12,15 @@ import java.util.List;
 @Slf4j
 public class SuperEpochRepository {
 
-    private final BlockfrostApi blockfrostApi;
     private final SuperEpochGenerator superEpochGenerator;
-    private List<SuperEpoch> superEpochs;
 
-    public SuperEpochRepository(BlockfrostApi blockfrostApi,
-                                SuperEpochGenerator superEpochGenerator) {
-        this.blockfrostApi = blockfrostApi;
+    public SuperEpochRepository(SuperEpochGenerator superEpochGenerator) {
         this.superEpochGenerator = superEpochGenerator;
-        refreshData();
     }
 
     public int currentSuperEpoch(int epochNo) {
-        return getSuperEpochs().stream().filter(superEpoch -> superEpoch.containsEpoch(epochNo)).findFirst().get().getId();
-    }
-
-    public List<SuperEpoch> getSuperEpochs() {
-        return superEpochs;
-    }
-
-    @Scheduled(fixedDelay = "1h", initialDelay = "1h")
-    public void refreshData() {
-        var epochNo = blockfrostApi.getLatestBlock().getEpoch();
-        log.info("Refreshing super epochs... currentEpochNo: {}", epochNo);
-
-        this.superEpochs = superEpochGenerator.getAllSuperEpochs(epochNo + 6);
+        return superEpochGenerator.getAllSuperEpochs(epochNo + 6)
+                .stream().filter(superEpoch -> superEpoch.containsEpoch(epochNo)).findFirst().get().getId();
     }
 
 }

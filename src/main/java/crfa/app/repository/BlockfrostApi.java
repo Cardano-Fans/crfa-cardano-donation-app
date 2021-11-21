@@ -20,10 +20,7 @@ public class BlockfrostApi {
 
     private final BlockService blockService;
 
-    @Value("${blockFrostProjectId}")
-    private String blockFrostProjectId;
-
-    public BlockfrostApi(AppEnvService appEnvService) {
+    public BlockfrostApi(AppEnvService appEnvService, @Value("${projectId}") String blockFrostProjectId) {
         if (appEnvService.appEnv() == MAINNET) {
             log.info("Blockfrost API in mainnet mode, projectId:{}", blockFrostProjectId);
             this.blockService = new BlockServiceImpl(BLOCKFROST_MAINNET_URL, blockFrostProjectId);

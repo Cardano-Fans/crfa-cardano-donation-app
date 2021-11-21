@@ -5,11 +5,11 @@ micronaut:
     port: 9095
 
 donation:
-  # EPOCH
+  # EPOCH or SUPER_EPOCH
   cadence: EPOCH
   entities:
-    cardano-fans: 1
-    ktorZ: 3
+    cardano-fans: 0
+    ktorZ: 0
 
 entities:
 
@@ -23,6 +23,6 @@ entities:
 
 dryRunMode: false
 env: testnet
-blockFrostProjectId: ?
+projectId: testnetSSuaIDKnuNpFY8YdWlEc2ToOFXY4CJB7
 walletFilename: .crfa-donation-app-wallet-testnet.dat
 dbPath: crfa-cardano-donation-app-testnet-dev.db

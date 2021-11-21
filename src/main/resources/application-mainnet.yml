@@ -153,6 +153,6 @@ entities:
 
 dryRunMode: true
 env: mainnet
-blockFrostProjectId: ?
+projectId: ogf0WXXsE3tY8ara3YUBmEJ9KRVnVBo6
 walletFilename: .crfa-donation-app-wallet-mainnet.dat
 dbPath: crfa-cardano-donation-app-mainnet-dev.db

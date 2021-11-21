@@ -50,7 +50,7 @@ public class CardanoTokenSender {
 
     public CardanoTokenSender(WalletPassReader walletPassReader,
                               AppEnvService appEnvService,
-                              @Value("${blockFrostProjectId}") String projectId,
+                              @Value("${projectId}") String projectId,
                               @Value("${walletIndex:0}") int walletIndex) {
         this.appEnvService = appEnvService;
         this.projectId = projectId;
