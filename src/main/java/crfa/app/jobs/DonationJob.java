@@ -70,6 +70,7 @@ public class DonationJob {
         environment.get("donation.cadence", Argument.STRING).flatMap(cad -> Enums.getIfPresent(Cadence.class, cad).toJavaUtil()).ifPresent(cadence -> {
             environment.get("donation.entities", Argument.mapOf(String.class, String.class)).ifPresent(donationEntitiesMap -> {
                 donationEntitiesMap.forEach((entityId, donationInAdaStr) -> {
+
                     if (isCreatable(donationInAdaStr) && Long.parseLong(donationInAdaStr) > 0) {
                         var adaDonation = Long.parseLong(donationInAdaStr);
                         entityRepository.findById(entityId).ifPresent(entity -> {
@@ -100,6 +101,10 @@ public class DonationJob {
                 });
 
                 var donations = donationsBuilder.build();
+                if (donations.isEmpty()) {
+                    log.warn("No donation to be made actually...");
+                    return;
+                }
 
                 // perform transaction to multiple parties
                 try {
