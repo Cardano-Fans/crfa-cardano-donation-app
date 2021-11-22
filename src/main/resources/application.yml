@@ -8,21 +8,16 @@ donation:
   # EPOCH or SUPER_EPOCH
   cadence: EPOCH
   entities:
-    cardano-fans: 0
-    ktorZ: 0
+    test-wallet1: 1
 
 entities:
 
-  cardano-fans:
-    name: cardano-fans
-    address: addr1q8nq8wdhrpq402qj4hyn5rxn624l0ccua8k3epl2xl3fz57zddeldn7syvs5x2uvuefk66azhr7lelrj423lxapuxkksknwfdj
-
-  ktorZ:
-    name: ktorZ
-    address: addr1g8alec26en95yzvzwpxfukglsw4nx9wrx99p3m8k2drwppvzj2enszcqyu9ps2
+  test-wallet1:
+    name: test-wallet1
+    address: addr_test1qrer5vurzl4krj7tlwvqy0kgtad8r53uug5276868xshcfkz2uggmz3kw8kt7yvkzue02nhfk6mhqjmta85qsd5etjzsmf3sfw
 
 dryRunMode: false
 env: testnet
 projectId: testnetSSuaIDKnuNpFY8YdWlEc2ToOFXY4CJB7
 walletFilename: .crfa-donation-app-wallet-testnet.dat
-dbPath: crfa-cardano-donation-app-testnet-dev.db
+dbPath: crfa-cardano-donation-app-testnet-testnet.db
