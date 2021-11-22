@@ -1,5 +1,3 @@
-# OPEN TO BETA TESTERS
-
 ## Introduction
 This is a donation application that automatically donates to certain entities / addresses specified in configuration file. It can donate either on epoch or super epoch (6 epochs) cadence.
 
@@ -8,6 +6,8 @@ One of common problems in Cardano is that apart from Catalyst and running a pool
 
 We need alternatives. This application allows anyone, delegator, user, spo to setup regular delegations to projects they support.
 
+
+
 ## Requirements
 - JDK11
 
@@ -15,6 +15,8 @@ We need alternatives. This application allows anyone, delegator, user, spo to se
 ./gradlew shadowJar
 
 ## Run
-java -Dmicronaut.config.files=application-mainnet.yml -jar crfa-cardano-donation-app-1.0-all.jar
+### main-net
+java -Dmicronaut.config.files=application-mainnet.yml -jar crfa-cardano-donation-app-0.1beta.jar
 
-java -Dmicronaut.config.files=application-testnet.yml -jar crfa-cardano-donation-app-1.0-all.jar
+### test-net
+java -Dmicronaut.config.files=application-testnet.yml -jar crfa-cardano-donation-app-0.1beta.jar

@@ -70,7 +70,8 @@ public class CardanoTokenSender {
 
             var ttl = blockService.getLastestBlock().getValue().getSlot() + 1000;
             for (Donation donation : donations) {
-                log.info("Donation:{}", donation);
+                log.debug("Donation:{}", donation);
+
                 var paymentTransaction = PaymentTransaction.builder()
                         .sender(donationAccount)
                         .receiver(donation.getAddress())
@@ -106,7 +107,7 @@ public class CardanoTokenSender {
 
             if (transaction.isSuccessful()) {
                 var transactionResult = (TransactionResult) transaction.getValue();
-                log.info("Transaction was successful, trxId:{}", transactionResult);
+                log.debug("Transaction was successful, trxId:{}", transactionResult);
 
                 return transactionResult.getTransactionId();
             }
