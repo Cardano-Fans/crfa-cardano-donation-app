@@ -9,9 +9,9 @@ donation:
   cadence: EPOCH
   entities:
     test-wallet1: 1
+  donor: matiwinnetou
 
 entities:
-
   test-wallet1:
     name: test-wallet1
     address: addr_test1qrer5vurzl4krj7tlwvqy0kgtad8r53uug5276868xshcfkz2uggmz3kw8kt7yvkzue02nhfk6mhqjmta85qsd5etjzsmf3sfw

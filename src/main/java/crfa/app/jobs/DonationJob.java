@@ -45,12 +45,19 @@ public class DonationJob {
     @Value("${walletIndex:0}")
     private int walletIndex;
 
+    @Value("${donation.cadence:SUPER_EPOCH}")
+    private String donationCadence;
+
+    @Value("${donation.donor:SUPER_EPOCH}")
+    private String donor;
+
     public DonationJob(BlockfrostApi blockfrostApi,
                        SuperEpochRepository superEpochRepository,
                        DonationRepository donationRepository,
                        EntityRepository entityRepository,
                        CardanoTokenSender cardanoTokenSender,
-                       Environment environment) {
+                       Environment environment
+                       ) {
         this.blockfrostApi = blockfrostApi;
         this.superEpochRepository = superEpochRepository;
         this.donationRepository = donationRepository;
@@ -67,7 +74,7 @@ public class DonationJob {
 
         ImmutableList.Builder<Donation> donationsBuilder = ImmutableList.builder();
 
-        environment.get("donation.cadence", Argument.STRING).flatMap(cad -> Enums.getIfPresent(Cadence.class, cad).toJavaUtil()).ifPresent(cadence -> {
+        Enums.getIfPresent(Cadence.class, donationCadence).toJavaUtil().ifPresent(cadence -> {
             environment.get("donation.entities", Argument.mapOf(String.class, String.class)).ifPresent(donationEntitiesMap -> {
                 donationEntitiesMap.forEach((entityId, donationInAdaStr) -> {
 
@@ -112,7 +119,7 @@ public class DonationJob {
                         log.info("Running in dryRun mode, we will not send ADA!");
                         donations.forEach(donation -> donation.setTransactionId("dry_run_mode"));
                     } else {
-                        var transactionId = cardanoTokenSender.sendDonations(donations);
+                        var transactionId = cardanoTokenSender.sendDonations(donations, donor);
                         donations.forEach(donation -> donation.setTransactionId(transactionId));
                     }
 

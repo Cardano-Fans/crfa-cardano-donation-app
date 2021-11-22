@@ -60,7 +60,7 @@ public class CardanoTokenSender {
         this.donationAccount = createAccount(pass, walletIndex);
     }
 
-    public String sendDonations(List<Donation> donations) throws ApiException {
+    public String sendDonations(List<Donation> donations, String sentBy) throws ApiException {
         if (donations.isEmpty()) {
             throw new RuntimeException("Nothing to send!");
         }
@@ -90,8 +90,8 @@ public class CardanoTokenSender {
 
             var memoMetadata = createMemoMetadata(List.of(
                     "CRFA-Cardano-Donation-App",
-                    "Cardano Fans Staking Pool (ticker: CRFA).",
-                    "https://github.com/Cardano-Fans/crfa-cardano-donation-app"
+                    String.format("Sent by: %s", sentBy),
+                    "Created by: Cardano Fans Staking Pool (ticker: CRFA)."
             ));
 
             var fee
