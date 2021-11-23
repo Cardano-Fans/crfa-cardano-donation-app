@@ -2,7 +2,7 @@
 This is a donation application that automatically donates to certain entities / addresses specified in configuration file. It can donate either on epoch or super epoch (6 epochs) basis, which we call internally cadence.
 
 ## Problem description
-One of common problems in Cardano is that apart from Catalyst and running a pool there is no way to fund certain development projects or charities. Some people setup a stake pool but even this doesn't guarantee that delegators will select such a pool, they may prefer other pools. In addition certain number of people are not interested in managing a stake pool. This all doesn't mean that one doesn't want to contribute, this could be as little as 1 ADA per month. If everybody contributes 1 ADA it ads up.
+One of common problems in Cardano is that apart from Catalyst and running a pool there is no way to fund certain development projects or charities. Some people setup a stake pool but even this doesn't guarantee that delegators will select such a pool, they may prefer other pools. In addition certain number of people are not interested in managing a stake pool. This all doesn't mean that one doesn't want to contribute, this could be as little as 1 ADA per month. If everybody contributes 1 ADA it adds up.
 
 We need alternatives. This application allows anyone, delegator, user, spo to setup regular delegations to projects or charities they support.
 
