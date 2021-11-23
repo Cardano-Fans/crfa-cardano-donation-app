@@ -48,7 +48,7 @@ public class DonationJob {
     @Value("${donation.cadence:SUPER_EPOCH}")
     private String donationCadence;
 
-    @Value("${donation.donor:SUPER_EPOCH}")
+    @Value("${donation.donor:anonymous}")
     private String donor;
 
     public DonationJob(BlockfrostApi blockfrostApi,
