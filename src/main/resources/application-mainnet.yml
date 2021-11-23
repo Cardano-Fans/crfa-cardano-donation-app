@@ -8,8 +8,9 @@ donation:
   # SUPER_EPOCH or EPOCH
   cadence: SUPER_EPOCH
   entities:
-    cardano-fans: 1
-    ktorZ: 5
+    cardano-fans: 0
+    ktorZ: 0
+  donor: anonymous
 
 entities:
 
@@ -151,8 +152,8 @@ entities:
       - tango_crypto
     description: Creators of cardano-wallet-js
 
-dryRunMode: true
+dryRunMode: false
 env: mainnet
-projectId: ogf0WXXsE3tY8ara3YUBmEJ9KRVnVBo6
+projectId: <FILL_YOUR_BLOCKFROST_PROJECT_ID>
 walletFilename: .crfa-donation-app-wallet-mainnet.dat
-dbPath: crfa-cardano-donation-app-mainnet-dev.db
+dbPath: crfa-cardano-donation-app-mainnet.db
