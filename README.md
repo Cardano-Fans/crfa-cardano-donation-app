@@ -40,7 +40,7 @@ donation:
     # donation wallet and how much ADA should be donated
     test-wallet1: 1
   # who donated - this will be then set in transaction metadata, this can be anything, email as well
-  donor: matiwinnetou
+  donor: anonymous
 
 # complete list of entities - of course one can add own entities(!)
 entities:
@@ -54,11 +54,11 @@ dryRunMode: false
 # what kind of environment it is, can be: testnet or mainnet
 env: testnet
 # blockfrost project Id
-projectId: <FILL_OUT>
+projectId: <FILL_YOUR_BLOCKFROST_PROJECT_ID>
 # wallet file name in home folder  
 walletFilename: .crfa-donation-app-wallet-testnet.dat
 # sqlite3 database location
-dbPath: crfa-cardano-donation-app-testnet-testnet.db
+dbPath: crfa-cardano-donation-app-testnet.db
 ```
 
 ## Recommendations
