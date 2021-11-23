@@ -21,12 +21,46 @@ We need alternatives. This application allows anyone, delegator, user, spo to se
 - Download latest jar from https://github.com/Cardano-Fans/crfa-cardano-donation-app/releases and install application into e.g. /opt/crfa-donation-app/crfa-cardano-donation-app-<version>.jar
 - for linux copy systemd file from contrib folder: crfa-donation-app.service into /etc/systemd/system and run sudo systemctl enable crfa-donation-app and copy crfa-donation-app.sh from contrib folder into /opt/crfa-donation-app
 - run via sudo systemctl start crfa-donation-app and observe log file via sudo systemctl -u crfa-donation-app -f
-- 
 
 ## Configuration file
 ```
+  micronaut:
+  application:
+    # don't touch it :)
+    name: crfa-cardano-donation-app
+  server:
+    # port on which app runs
+    port: 9095
+
+donation:
+  # how often transaction should be done, can be: EPOCH or SUPER_EPOCH
+  cadence: EPOCH
+  # to whom donations should be done
+  entities:
+    # donation wallet and how much ADA should be donated
+    test-wallet1: 1
+  # who donated - this will be then set in transaction metadata, this can be anything, email as well
+  donor: matiwinnetou
+
+# complete list of entities - of course one can add own entities(!)
+entities:
+  test-wallet1:
+    # entity name
+    name: test-wallet1
+    address: addr_test1qrer5vurzl4krj7tlwvqy0kgtad8r53uug5276868xshcfkz2uggmz3kw8kt7yvkzue02nhfk6mhqjmta85qsd5etjzsmf3sfw
+
+# dry run mode means it will actually not send any value, just for testing
+dryRunMode: false
+# what kind of environment it is, can be: testnet or mainnet
+env: testnet
+# blockfrost project Id
+projectId: <FILL_OUT>
+# wallet file name in home folder  
+walletFilename: .crfa-donation-app-wallet-testnet.dat
+# sqlite3 database location
+dbPath: crfa-cardano-donation-app-testnet-testnet.db
 ```
-  
+
 ## Build
 ./gradlew shadowJar
 
