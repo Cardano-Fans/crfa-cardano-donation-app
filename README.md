@@ -39,7 +39,7 @@ donation:
   entities:
     # donation wallet and how much ADA should be donated
     test-wallet1: 1
-  # who donated - this will be then set in transaction metadata, this can be anything, email as well
+  # who donated - this will be then set in transaction metadata, this can be anything, nickname / email / name
   donor: anonymous
 
 # complete list of entities - of course one can add own entities(!)
