@@ -61,8 +61,16 @@ walletFilename: .crfa-donation-app-wallet-testnet.dat
 dbPath: crfa-cardano-donation-app-testnet-testnet.db
 ```
 
+## Recommendations
+- we recommend to stake your cold wallet
+- we recommend not to host this up in the cloud environment
+- we recommend to have small part of your idea in this wallet, after all this is a cold wallet, not hardware wallet
+- we recommend that other users in the system have no access to home folder to read pass-phrase or even better - that it is run on private server in e.g. home network
+  
 ## Build
+```
 ./gradlew shadowJar
+```
 
 ## Run without systemd (not recommended, only for testing)
 ### main-net
