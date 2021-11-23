@@ -66,6 +66,7 @@ dbPath: crfa-cardano-donation-app-testnet.db
 - we recommend not to host this app in the cloud environment but rather on private home or office server
 - we recommend to have small part of your ADA in this wallet, after all this is a cold wallet, not hardware wallet
 - we recommend that other users in the system have no access to home folder to read pass-phrase or even better only one person or trusted people having access to home or office server
+- due to security vulnerabilities we would discourage users from running this app on Windows and rather avoid running on osx, linux or *nix based systems are really the best for this app
   
 ## Build
 ```
