@@ -76,7 +76,7 @@ dbPath: crfa-cardano-donation-app-testnet.db
 ## Run without systemd (not recommended, only for testing)
 ### main-net
 ```
-java -Dmicronaut.config.files=application-mainnet.yml -jar crfa-cardano-donation-app-<versio>.jar
+java -Dmicronaut.config.files=application-mainnet.yml -jar crfa-cardano-donation-app-<version>.jar
 ```
   
 ### test-net
