@@ -9,10 +9,11 @@ We need alternatives. This application allows anyone, delegator, user, spo to se
 ### 
 
 ## Requirements
-- at least JDK11 (feature request: native image / docker image)
+- At least JDK11 (Feature Request: native image via GraalVM / docker image -> give us a shout!)
 - Intel / AMD
 - Linux or OSX
-- Currently ARM: Raspberry PI 3 and 4 are not supported (feature request: Raspberry PI support)
+- Currently ARM: Raspberry PI 3 and 4 are not supported (Feature Request -> Raspberry PI support give us a shout!)
+- Single address wallet only and if you use this wallet / address then use it only by wallets with single address support (e.g. NamniWallet / ccvault).
 
 ## Installation
 - Create test and / or mainnet project on https://blockfrost.io, you need projectId inside of configuration file
@@ -67,6 +68,7 @@ dbPath: crfa-cardano-donation-app-testnet.db
 - we recommend to have small part of your ADA in this wallet, after all this is a cold wallet, not hardware wallet
 - we recommend that other users in the system have no access to home folder to read pass-phrase or even better only one person or trusted people having access to home or office server
 - due to security vulnerabilities often found in operating systems or viruses / trojan horses, we would discourage users from running this app on Windows and rather avoid running on osx, linux or *nix based systems are really the best for this app
+
   
 ## Build
 ```
