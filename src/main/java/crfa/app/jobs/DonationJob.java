@@ -44,18 +44,18 @@ public class DonationJob {
         if (dryRunMode) {
             log.info("Running in dryRun mode, we will not send ADA!");
             donations.forEach(donation -> donation.setTransactionId("dry_run_mode"));
+            donations.forEach(donationRepository::insertDonation);
         } else {
             Result<TransactionResult> txResponse = cardanoTokenSender.sendDonations(donations, donor);
             if (txResponse.isSuccessful()) {
                 var transactionResult = (TransactionResult) txResponse.getValue();
                 log.info("Transaction was successful, trxId:{}", transactionResult.getTransactionId());
                 donations.forEach(donation -> donation.setTransactionId(transactionResult.getTransactionId()));
+                donations.forEach(donationRepository::insertDonation);
             } else {
                 log.error("Sending donations failed, txResponse: {}", txResponse);
             }
         }
-
-        donations.forEach(donationRepository::insertDonation);
     }
 
 }
