@@ -30,23 +30,21 @@ public class DonationAccountFactory {
     private AppEnvService appEnvService;
 
     @Bean
-    public Account donationAccount() {
+    public Account donationAccount() throws IOException {
         Network.ByReference network = appEnvService.isMainnet() ? Networks.mainnet() : Networks.testnet();
         String recoveryPhrase = readWalletPassFile(walletPassFile);
         return new Account(network, recoveryPhrase, walletIndex);
     }
 
-    public String readWalletPassFile(String walletPassFile) {
+    public String readWalletPassFile(String walletPassFile) throws IOException {
         try {
             var file = new File(FileUtils.getUserDirectory(), walletPassFile);
             log.info("Reading wallet from file: {}", file);
 
             return FileUtils.readFileToString(file, UTF_8);
         } catch (IOException e) {
-            var msg = "Unable to read: " + walletPassFile;
-            log.error(msg, e);
-            System.exit(-1);
-            throw new RuntimeException(msg, e);
+            log.error("Unable to read wallet filename: {}", walletPassFile, e);
+            throw e;
         }
     }
 
