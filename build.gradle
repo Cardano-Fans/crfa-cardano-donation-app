@@ -3,7 +3,7 @@ plugins {
     id("io.micronaut.application") version "2.0.4"
 }
 
-version = "0.2beta"
+version = "0.3beta"
 group = "crfa.app"
 
 repositories {
