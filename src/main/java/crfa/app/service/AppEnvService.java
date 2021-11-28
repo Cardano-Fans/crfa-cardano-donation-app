@@ -4,6 +4,8 @@ import crfa.app.infrastructure.AppEnv;
 import io.micronaut.context.annotation.Value;
 import jakarta.inject.Singleton;
 
+import static crfa.app.infrastructure.AppEnv.MAINNET;
+
 @Singleton
 public class AppEnvService {
 
@@ -17,4 +19,7 @@ public class AppEnvService {
         return AppEnv.valueOf(env.toUpperCase());
     }
 
+    public boolean isMainnet() {
+        return MAINNET == appEnv();
+    }
 }
