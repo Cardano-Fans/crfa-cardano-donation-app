@@ -33,6 +33,7 @@ public class DonationAccountFactory {
     public Account donationAccount() throws IOException {
         Network.ByReference network = appEnvService.isMainnet() ? Networks.mainnet() : Networks.testnet();
         String recoveryPhrase = readWalletPassFile(walletPassFile);
+
         return new Account(network, recoveryPhrase, walletIndex);
     }
 

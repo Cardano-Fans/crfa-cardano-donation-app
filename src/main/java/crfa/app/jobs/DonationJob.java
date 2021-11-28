@@ -39,23 +39,27 @@ public class DonationJob {
             log.warn("No eligible donations are found...");
             return;
         }
+
         ImmutableList<Donation> donations = optionalDonations.get();
-        // perform transaction to multiple parties
         if (dryRunMode) {
             log.info("Running in dryRun mode, we will not send ADA!");
             donations.forEach(donation -> donation.setTransactionId("dry_run_mode"));
             donations.forEach(donationRepository::insertDonation);
-        } else {
-            Result<TransactionResult> txResponse = cardanoTokenSender.sendDonations(donations, donor);
-            if (txResponse.isSuccessful()) {
-                var transactionResult = (TransactionResult) txResponse.getValue();
-                log.info("Transaction was successful, trxId:{}", transactionResult.getTransactionId());
-                donations.forEach(donation -> donation.setTransactionId(transactionResult.getTransactionId()));
-                donations.forEach(donationRepository::insertDonation);
-            } else {
-                log.error("Sending donations failed, txResponse: {}", txResponse);
-            }
+
+            return;
         }
+
+        Result<TransactionResult> txResponse = cardanoTokenSender.sendDonations(donations, donor);
+        if (txResponse.isSuccessful()) {
+            var transactionResult = (TransactionResult) txResponse.getValue();
+            log.info("Transaction was successful, trxId:{}", transactionResult.getTransactionId());
+            donations.forEach(donation -> donation.setTransactionId(transactionResult.getTransactionId()));
+            donations.forEach(donationRepository::insertDonation);
+
+            return;
+        }
+
+        log.error("Sending donations failed, txResponse: {}", txResponse);
     }
 
 }

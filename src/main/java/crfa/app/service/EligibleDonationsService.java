@@ -35,11 +35,15 @@ public class EligibleDonationsService {
     @Inject
     private SuperEpochRepository superEpochRepository;
     @Inject
+
     private DonationRepository donationRepository;
+
     @Inject
     private EntityRepository entityRepository;
+
     @Inject
     private BlockService blockService;
+    
     @Inject
     private Environment environment;
 
@@ -53,6 +57,7 @@ public class EligibleDonationsService {
         ImmutableList.Builder<Donation> donationsBuilder = ImmutableList.builder();
 
         Cadence cadence = Enums.getIfPresent(Cadence.class, donationCadence).or(SUPER_EPOCH);
+
         int currentEpochNo = getCurrentEpochNo();
         int currentSuperEpochNo = superEpochRepository.currentSuperEpoch(currentEpochNo);
 
@@ -86,6 +91,7 @@ public class EligibleDonationsService {
             }
         });
         ImmutableList<Donation> donations = donationsBuilder.build();
+
         return donations.isEmpty() ? Optional.empty() : Optional.of(donations);
     }
 
@@ -95,7 +101,8 @@ public class EligibleDonationsService {
             if (result.isSuccessful()) {
                 return result.getValue().getEpoch();
             }
-            throw new RuntimeException("Failed to get latest block");
+
+            throw new RuntimeException("Failed to get latest block!");
         } catch (ApiException e) {
             log.error("Blockfrost error", e);
             throw new RuntimeException("blockfrost error", e);
