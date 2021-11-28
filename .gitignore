@@ -14,4 +14,4 @@ out/
 .factorypath
 crfa-cardano-donation-app-dev.db
 crfa-cardano-donation-app-testnet-dev.db
-crfa-cardano-donation-app-testnet-testnet.db
+crfa-cardano-donation-app-testnet.db
